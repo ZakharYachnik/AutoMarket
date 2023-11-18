@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit role</title>
+</head>
+<body>
+    <div>
+      <span th:text="|id: ${user.getUserId()}|"/>
+      <br>
+      <span th:text="|username: ${user.getUsername()}|"/>
+      <br>
+      <span th:text="|password: ${user.getPassword()}|"/>
+      <br>
+      <br>
+      <form th:method="POST" th:action="@{/users}">
+        <input type="hidden" th:value="${user.getUserId()}" name="userId">
+        <div>
+          <label>
+            <input type="radio" th:name="userRole" th:value="USER"  th:checked="${user.getUserRole().getRole() == 'USER'}"> USER
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" th:name="userRole" th:value="ADMIN" th:checked="${user.getUserRole().getRole() == 'ADMIN'}"> ADMIN
+          </label>
+        </div>
+        <div>
+          <br>
+          <button type="submit">Изменить</button>
+        </div>
+      </form>
+    </div>
+</body>
+</html>

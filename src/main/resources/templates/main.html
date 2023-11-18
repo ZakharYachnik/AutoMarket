@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<div>
+    <p th:text="|Current auth user is ${user.getUsername()}|"></p>
+    <div th:if="${user.getUserRole().getRole() == 'ADMIN'}">
+        <a th:href="@{/users}">Список пользователей</a>
+    </div>
+</div>
+</body>
+</html>
