@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Регистрация и Авторизация</title>
+    <link rel="stylesheet" href="../../css/login.css" th:href="@{/css/login.css}">
+<!--    <link rel="shortcut icon" href="/images/warning.png" type="image/x-icon">-->
 </head>
 <body>
-Sing in page
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username" autocomplete="off"/> </label></div>
-    <div><label> Password: <input type="password" name="password" autocomplete="off"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<a th:href="@{/registration}">Registration</a>
+<h1>Войдите в аккаунт</h1>
+<div id="wrapper">
+    <form id="signin" th:action="@{/login}" method="post" autocomplete="off">
+        <input type="text" id="user" name="username" placeholder="username" autocomplete="off"/>
+        <input type="password" id="pass" name="password" placeholder="password" autocomplete="off"/>
+        <button type="submit">&#xf0da;</button>
+        <p>Еще нет аккаунта? <a th:href="@{/registration}">Регистрация</a></p>
+    </form>
+<!--    <% if ( error !== '') { %>-->
+<!--    <div class="error">-->
+<!--        <p><%= error %></p>-->
+<!--    </div>-->
+<!--    <% } %>-->
+</div>
 </body>
 </html>

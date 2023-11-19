@@ -42,4 +42,11 @@ public class AdminController {
         userRepository.save(user);
         return "redirect:/users";
     }
+
+    @PostMapping("/delete")
+    public String deleteUserById(
+            @RequestParam("userId") User user) {
+        userRepository.deleteById(user.getUserId());
+        return "redirect:/users";
+    }
 }

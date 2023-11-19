@@ -33,7 +33,7 @@ public class MainController {
 
     @GetMapping("/")
     public String showHome(){
-        return "home";
+        return "redirect:/main";
     }
 
 }
