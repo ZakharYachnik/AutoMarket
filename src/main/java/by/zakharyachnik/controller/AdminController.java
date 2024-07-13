@@ -3,8 +3,12 @@ package by.zakharyachnik.controller;
 import by.zakharyachnik.entity.User;
 import by.zakharyachnik.repositories.RoleRepository;
 import by.zakharyachnik.repositories.UserRepository;
+import by.zakharyachnik.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
+    UserService userService;
     @GetMapping()
     public String checkUsersList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
 
@@ -30,7 +30,6 @@ public class AdminController {
             @PathVariable User user,
             Model model) {
         model.addAttribute("user", user);
-        System.out.println(user.getUserId() + " " + user.getUsername());
         return "edit_user_role";
     }
 
@@ -38,15 +37,14 @@ public class AdminController {
     public String saveChangedUserRole(
             @RequestParam("userRole") String userRole,
             @RequestParam("userId") User user) {
-        user.setUserRole(roleRepository.findByRole(userRole));
-        userRepository.save(user);
+        userService.changeUserRole(user, userRole);
         return "redirect:/users";
     }
 
     @PostMapping("/delete")
     public String deleteUserById(
             @RequestParam("userId") User user) {
-        userRepository.deleteById(user.getUserId());
+        userService.deleteUserById(user.getUserId());
         return "redirect:/users";
     }
 }

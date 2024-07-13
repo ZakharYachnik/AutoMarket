@@ -154,8 +154,8 @@ h1{
    .little_button2
    {
 	position: relative;
-    left: -65px;
-	top: -32px;
+    left: -93px;
+	top: -63px;
 	padding: 0px;
 	margin: 0px;
 	background: transparent;
@@ -166,8 +166,8 @@ h1{
    .little_button3
    {
 	position: relative;
-    left: -95px;
-	top: 12px;
+    left: -123px;
+	top: 11px;
 	padding: 0px;
 	margin: 0px;
 	background: transparent;
@@ -178,8 +178,8 @@ h1{
    .little_button4
    {
 	position: relative;
-    left: -125px;
-	top: 57px;
+    left: -153px;
+	top: 56px;
 	padding: 0px;
 	margin: 0px;
 	background: transparent;
@@ -192,7 +192,7 @@ h1{
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 	font-weight: 700;
 	font-size: 15px;
-	margin-top: 40px;
+	margin-top: 10px;
 	margin-left: 15px;
 	padding: 5px;
 	margin-bottom: 10px;

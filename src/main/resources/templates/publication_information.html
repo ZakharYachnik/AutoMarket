@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/headerFooter.css" th:href="@{/css/headerFooter.css}">
+    <link rel="stylesheet" href="../../css/modal.css" th:href="@{/css/modal.css}">
+    <link rel="stylesheet" href="../../css/publication_information.css" th:href="@{/css/publication_information.css}">
+
+    <title>checkCar</title>
+</head>
+<body>
+<div th:replace="${user.getUserRole().getRole() == 'ADMIN'} ? 'fragments/admin_header' : 'fragments/user_header' :: header">
+</div>
+<div class="container main-div">
+    <div class="row">
+        <div class="col-12 Head">
+            <h2 class="headName"
+                th:text="${publication.getCar().getMake()} + ' ' + ${publication.getCar().getModel()} + ', ' + ${publication.getCar().getYear()}"></h2>
+            <div th:if="${user.getUserRole().getRole() == 'ADMIN' || user.getUserId() == publication.getUser().getUserId()}" class="edit-div">
+              <a class="change-btn" th:href="@{/catalog/{publicationId}/edit(publicationId=${publication.getId()})}">Редактировать</a>
+                <form th:action="@{/catalog/{publicationId}/delete(publicationId=${publication.getId()})}" method="post" class="delete-form">
+                <button class="delete-btn" type="submit">Удалить</button>
+<!--                <input type="hidden" id="publicationId" th:value="${publication.getId()}" />-->
+                </form>
+            </div>
+            <div th:if="${user.getUserRole().getRole() != 'ADMIN' && user.getUserId() != publication.getUser().getUserId()}">
+<!--                <p th:text="${isFavorite}" style="font-size: 30px; color: red"></p>-->
+                <div th:if="${!isFavorite}">
+                    <form th:action="@{/catalog/{publicationId}/add_to_favorite(publicationId=${publication.getId()})}" method="post" class="favorite-form">
+                        <button class="favorite-btn" type="submit">Добавить в избранное</button>
+                    </form>
+                </div>
+                <div th:if="${isFavorite}">
+                    <form th:action="@{/catalog/{publicationId}/delete_from_favorite(publicationId=${publication.getId()})}" method="post" class="favorite-form">
+                        <button class="delete-favorite-btn" type="submit">Удалить из избранного</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row car-container">
+        <div class="col-8 imgSel">
+            <img th:src="@{/upload/{path}(path=${publication.getCar().getPhotoName()})}" alt="фото машины" class="carImg">
+        </div>
+        <div class="col-4 infoSel">
+            <div class="row row-cols-1">
+                <div class="col priceSel">
+                    <h3 class="price" th:text="${publication.getPrice()} + ' BYN, Наличные'"></h3>
+                </div>
+                <div class="col parametrs">
+                    <ul>
+                        <span class="character"> Характеристики </span>
+                        <li th:text="'Год выпуска: ' + ${publication.getCar().getYear()}">
+                        </li>
+                        <li th:text="'Тип двигателя: ' + ${publication.getCar().getEngineType()}">
+                        </li>
+                        <li th:text="'Тип привода: ' + ${publication.getCar().getDriveType()}">
+                        </li>
+                        <li th:text="'Тип кузова: ' + ${publication.getCar().getBodyType()}">
+                        </li>
+                        <li th:text="'Коробка передач: ' + ${publication.getCar().getTransmission()}">
+                        </li>
+                    </ul>
+                </div>
+                <div class="col btnDiv">
+                    <button type="button" class="call-btn">Позвонить</button>
+                    <input type="hidden" id="fullName" th:value="${publication.getUser().getUserInfo().getFullName()}" />
+                    <input type="hidden" id="phoneNumber" th:value="${publication.getUser().getUserInfo().getPhoneNumber()}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 description">
+            <h2 class="descriptionH2">Описание</h2>
+            <p class="description-text" th:text="${publication.getDescription()}">
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 comment-form">
+            <form th:action="@{/catalog/{publicationId}/comment(publicationId=${publication.getId()})}" method="POST">
+                <label for="writed-comment" class="comment-label">Комментарий:</label>
+                <textarea class="writed-comment" id="writed-comment" name="commentText" rows="4" cols="50"
+                          placeholder="Напишите комментарий" required></textarea><br><br>
+                <input type="submit" value="Отправить">
+            </form>
+        </div>
+    </div>
+    <div class="comment-list">
+        <ul class="list">
+            <li th:each="comment : ${comments}">
+                <div class="row">
+                    <div class="col-2 avatar">
+                        <img th:src="@{/images/avatar.png}" alt="аватар" class="avatarImg">
+                    </div>
+                    <div class="comments">
+                        <div class="comment dialog">
+                            <h4 class="username" th:text="${comment.getUser().getUsername()}"></h4>
+                            <p class="comment-text" th:text="${comment.getCommentText()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer">
+</div>
+<script th:src="@{/script/modal.js}"></script>
+<script>
+    var callBtn = document.querySelector('.call-btn');
+    var userName = document.getElementById('fullName').value;
+    var phoneNumber = document.getElementById('phoneNumber').value;
+
+    const modalContent = `<h2 class="H2"><span class="FIO">${userName}</span> <br><br> <span class="number">${phoneNumber}</span></h2>`;
+    callBtn.addEventListener('click', () =>{
+        const modal = new ItcModal({
+            title: modalContent,
+            content: '<button type ="button" class = "link">Готово</button>'
+        })
+        modal.show();
+        var closeBtn = document.querySelector('.link');
+        closeBtn.addEventListener('click', () =>{
+            modal.dispose();
+        });
+    });
+
+    var deleteBtn = document.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', () =>{
+        const modal = new ItcModal({
+            title: '<h2 class ="H2">Объявление успешно удалено</h2>'
+        })
+        modal.show();
+    });
+
+</script>
+</body>
+</html>
+

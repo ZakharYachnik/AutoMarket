@@ -1,0 +1,300 @@
+body
+{
+    margin: 0px;
+    background-color: #2c2b2b;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.container-list {
+    justify-content: space-between;
+}
+
+.price{
+    margin-left: 260px;
+}
+.list li {
+    color:#e7e5e5;
+    border-radius: 10px;
+    background-color: #7a7979;
+    margin-top: 30px;
+    width: 70vw;
+    height: 200px;
+    list-style-type: none;
+    padding:10px;
+    padding-right: 0px;
+    border: 2px solid #979595;
+    /* box-sizing: border-box; */
+}
+
+.list li:last-child{
+    margin-bottom: 30px;
+}
+
+.list li:hover{
+    box-shadow: 0 0 10px #b2b1b1;
+}
+
+
+.imgSel{
+    padding: 0px;
+    margin: 0px;
+    height: 180px;
+    width: 300px;
+}
+
+.carImg{
+    height: 180px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.titleH2 {
+    padding-right: 0px;
+    width: 730px;
+    display: flex;
+    height: 100px;
+    padding-top: 5px;
+}
+
+.titleH2 h2{
+    margin-top: 0px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.row-col-1{
+    width: 100%;
+}
+.model{
+    width: 300px;
+}
+
+.no-style-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.no-style-link:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.parametrs{
+    padding-left: 0px;
+    font-size: 17px;
+
+}
+
+.col-8{
+    width: 750px;
+}
+
+.filter-container {
+    border-radius: 10px;
+    border: 2px solid #979595;
+    background-color: #626161;
+    max-width: 70vw;
+    margin-top: 30px;
+    padding: 10px;
+    margin-right: 220px;
+    justify-content: space-between;
+}
+
+.filter-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    height: 45px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 5px;
+
+}
+
+
+.filter-btn{
+    margin-left: 105px;
+    width: 300px;
+    height: 45px;
+    background-color: #f33;
+    margin-top: 35px;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #fff;
+    color: #f33;
+}
+
+select {
+    height: 45px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.msg{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: red;
+    /* text-shadow: 1px 1px 0px#bbbaba; */
+    font-size: 30px;
+    text-align: center;
+}
+
+
+
+.sort-row{
+    margin-bottom: 15px;
+    margin-top:15px;
+}
+
+input[type="radio"] {
+    display: none; /* Скрываем настоящие radio-кнопки */
+}
+/* Стили для обертки radio-кнопки */
+.sort {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Стили для визуальных radio-кнопок */
+.btn-sort,
+.btn-sort-desc {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Стили для визуальных radio-кнопок в состоянии "выбрано" */
+.btn-sort:checked + .label-sort,
+.btn-sort-desc:checked + .label-sort {
+    color: #bb0101; /* Изменяем цвет текста на красный */
+    text-shadow: 0 1px 1px black; /* Изменяем тень текста на красную */
+    font-weight: 600;
+}
+
+/* Стили для текста справа от radio-кнопок */
+.label-sort {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.btn-my-cars{
+    margin-left: 50px;
+    width: 250px;
+    height: 45px;
+    background-color: rgb(0, 164, 38);
+    color: #f6f9f7;
+    padding: 10px 20px;
+    border: 2px solid rgb(0, 164, 38);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-my-cars:hover{
+    background-color: #bff9c1;
+    color: rgb(2, 131, 32);
+    box-shadow: 0px 0px 10px rgb(2, 243, 10);
+}
+
+.container-search-user{
+    border-radius: 10px;
+    border: 2px solid #979595;
+    background-color: #626161;
+    max-width: 70vw;
+    margin-top: 30px;
+    padding: 10px;
+    margin-right: 220px;
+    justify-content: space-between;
+}
+
+.criteria{
+    display: flex;
+}
+.search-criteria,
+.input-criteria{
+    max-width: 50%;
+    margin-bottom: 20px;
+}
+
+.search-criteria{
+    margin-right: 5%;
+}
+
+
+.btn-search{
+    margin-left: 30%;
+    width: 40%;
+    height: 45px;
+    background-color: rgb(0, 164, 38);
+    color: #f6f9f7;
+    padding: 10px 20px;
+    border: 2px solid rgb(0, 164, 38);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover{
+    background-color: #bff9c1;
+    color: rgb(2, 131, 32);
+    box-shadow: 0px 0px 10px rgb(2, 243, 10);
+}
+
+.label-search{
+    margin-left: 34%;
+    font-size: 20px;
+}
+
+.search-msg{
+    text-shadow: 1px 1px 0px black;
+    color: rgb(218, 0, 0);
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

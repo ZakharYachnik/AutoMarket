@@ -1,45 +1,42 @@
 package by.zakharyachnik.controller;
 
-import by.zakharyachnik.entity.User;
-import by.zakharyachnik.entity.UserRole;
-import by.zakharyachnik.repositories.RoleRepository;
-import by.zakharyachnik.repositories.UserRepository;
+import by.zakharyachnik.service.UserService;
+import by.zakharyachnik.service.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
+    private UserService userService;
 
     @GetMapping("/registration")
     public String registration(Model model){
-        model.addAttribute("user", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registerUser(@ModelAttribute("user") User user, Model model){
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-
-        if(userFromDb != null){
-            model.addAttribute("message", "User exists!");
+    public String registerUser(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("phone_number") String phoneNumber,
+            @RequestParam("full_name") String fullName,
+            Model model){
+        try {
+            userService.registration(username, password, phoneNumber, fullName);
+        } catch (ServiceException e) {
+            if(e.getMessage().equals("User exists!")){
+                model.addAttribute("message", "Данный логин уже занят!");
+            }else{
+                model.addAttribute("message", "Произошла ошибка!");
+            }
             return "registration";
         }
 
-        user.setActive(true);
-        UserRole userRole = roleRepository.findByRole("USER");
-        user.setUserRole(userRole);
-
-        userRepository.save(user);
-
         return "redirect:/login";
-
     }
 }
